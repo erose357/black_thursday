@@ -1,4 +1,4 @@
-require 'merchant'
+require_relative 'merchant'
 require 'csv'
 
 class MerchantRepository
@@ -6,6 +6,10 @@ class MerchantRepository
 
   def initialize(file_path)
     @data = parse_csv(file_path)
+  end
+
+  def inspect
+    "#<#{self.class} #{@data.size} rows>"
   end
 
   def parse_csv(file)
@@ -28,5 +32,11 @@ class MerchantRepository
     name = merchant_name.downcase
     merchant = @data.find { |k,v| v.name.downcase == name }
     merchant == nil ? nil : merchant[1]
+  end
+
+  def find_all_by_name(merchant_name)
+    name = merchant_name.downcase
+    merchants = @data.select { |k,v| v.name.downcase.include?(name) }
+    merchants == {} ? [] : merchants.values
   end
 end

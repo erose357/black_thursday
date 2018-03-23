@@ -1,4 +1,4 @@
-require 'sales_engine'
+require_relative '../lib/sales_engine'
 
 RSpec.describe SalesEngine do
   let (:file_paths) { { merchants:  'spec/fixtures/merchants_fixture.csv' } }

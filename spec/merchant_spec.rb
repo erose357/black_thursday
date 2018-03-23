@@ -1,4 +1,4 @@
-require 'merchant'
+require_relative '../lib/merchant'
 
 RSpec.describe Merchant do
   let (:m) { Merchant.new({id: 100, name: 'Fake Company'}) }
