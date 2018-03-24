@@ -15,4 +15,8 @@ class Item
     time_arr = time_string.split(/[-:' ']/)
     Time.utc(time_arr[0], time_arr[1], time_arr[2], time_arr[3], time_arr[4], time_arr[5])
   end
+
+  def unit_price_to_dollars(unit_price)
+    unit_price.to_f
+  end
 end

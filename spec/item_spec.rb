@@ -63,5 +63,11 @@ RSpec.describe Item do
         expect(time.utc?).to eq(true) 
       end
     end
+
+    describe '#unit_price_to_dollars' do
+      it 'returns the price of an item in $ as a Float' do
+        expect(i.unit_price_to_dollars(i.unit_price)).to eq(10.99)
+      end
+    end
   end
 end
