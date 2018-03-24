@@ -29,14 +29,12 @@ class MerchantRepository
   end
 
   def find_by_name(merchant_name)
-    name = merchant_name.downcase
-    merchant = @data.find { |k,v| v.name.downcase == name }
+    merchant = @data.find { |k,v| v.name.downcase == merchant_name.downcase }
     merchant == nil ? nil : merchant[1]
   end
 
   def find_all_by_name(merchant_name)
-    name = merchant_name.downcase
-    merchants = @data.select { |k,v| v.name.downcase.include?(name) }
+    merchants = @data.select { |k,v| v.name.downcase.include?(merchant_name.downcase) }
     merchants == {} ? [] : merchants.values
   end
 end
