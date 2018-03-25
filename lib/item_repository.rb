@@ -1,6 +1,5 @@
 require_relative 'item'
 require 'csv'
-require 'bigdecimal'
 
 class ItemRepository
   attr_reader :data
@@ -34,15 +33,13 @@ class ItemRepository
   end
 
   def find_all_with_description(item_description)
-    @data.values.find_all { |i| i.description.downcase.include?(item_description.downcase) }
+    @data.values.find_all do |i|
+      i.description.downcase.include?(item_description.downcase)
+    end
   end
 
   def find_all_by_price(item_price)
-    @data.values.find_all do |i|
-      i.unit_price == item_price
-    end
-      
-      #{ |i| i.unit_price == item_price }
+    @data.values.find_all { |i| i.unit_price == item_price }
   end
 
   def find_all_by_price_in_range(range)

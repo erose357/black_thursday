@@ -2,7 +2,8 @@ require 'bigdecimal'
 require 'time'
 
 class Item
-  attr_reader :id, :name, :description, :unit_price, :created_at, :updated_at, :merchant_id
+  attr_reader :id, :name, :description, :unit_price,
+              :created_at, :updated_at, :merchant_id
 
   def initialize(attrs)
     @id = attrs[:id].to_i
@@ -16,7 +17,8 @@ class Item
 
   def format_time(time_string)
     time_arr = time_string.split(/[-:' ']/)
-    Time.utc(time_arr[0], time_arr[1], time_arr[2], time_arr[3], time_arr[4], time_arr[5])
+    Time.utc(time_arr[0], time_arr[1], time_arr[2],
+             time_arr[3], time_arr[4], time_arr[5])
   end
 
   def format_price(price_string)

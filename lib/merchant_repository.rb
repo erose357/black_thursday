@@ -15,7 +15,7 @@ class MerchantRepository
   def parse_csv(file)
     data_hash = {}
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
-      data_hash[row[:id].to_i] = Merchant.new({:id => row[:id].to_i, :name => row[:name]})
+      data_hash[row[:id].to_i] = Merchant.new(Hash[row])
     end
     @data = data_hash
   end
@@ -34,7 +34,9 @@ class MerchantRepository
   end
 
   def find_all_by_name(merchant_name)
-    merchants = @data.select { |k,v| v.name.downcase.include?(merchant_name.downcase) }
+    merchants = @data.select do |k,v|
+      v.name.downcase.include?(merchant_name.downcase)
+    end
     merchants == {} ? [] : merchants.values
   end
 end
