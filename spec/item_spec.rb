@@ -1,10 +1,10 @@
 require_relative '../lib/item'
 
 RSpec.describe Item do
-  let (:i) { Item.new({:id => '123456'.to_i,
+  let! (:i) { Item.new({:id => '123456',
                        :name => 'Pencil',
                        :description => 'You can use it to write things',
-                       :unit_price => BigDecimal.new(10.99, 4),
+                       :unit_price => '1099',
                        :created_at => '2007-06-04 21:35:10 UTC',
                        :updated_at => '2016-01-11 09:34:06 UTC'}) }
 
