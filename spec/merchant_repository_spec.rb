@@ -1,7 +1,7 @@
 require_relative '../lib/merchant_repository'
 
 RSpec.describe MerchantRepository do
-  let (:mr) { MerchantRepository.new("spec/fixtures/merchants_fixture.csv") }
+  let (:mr) { MerchantRepository.new("spec/fixtures/merchants_fixture.csv", 'parent' ) }
 
   it 'is a valid instance' do
     expect(mr).to be_an_instance_of(MerchantRepository)

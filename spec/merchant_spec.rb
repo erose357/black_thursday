@@ -1,7 +1,7 @@
 require_relative '../lib/merchant'
 
 RSpec.describe Merchant do
-  let (:m) { Merchant.new({id: 100, name: 'Fake Company'}) }
+  let (:m) { Merchant.new({id: 100, name: 'Fake Company'}, 'parent') }
 
   it 'is a valid instance' do
     expect(m).to be_an_instance_of(Merchant)

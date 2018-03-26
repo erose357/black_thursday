@@ -6,7 +6,7 @@ RSpec.describe Item do
                        :description => 'You can use it to write things',
                        :unit_price => '1099',
                        :created_at => '2007-06-04 21:35:10 UTC',
-                       :updated_at => '2016-01-11 09:34:06 UTC'}) }
+                       :updated_at => '2016-01-11 09:34:06 UTC'}, 'parent') }
 
   it 'is a valid instance' do
     expect(i).to be_an_instance_of(Item)

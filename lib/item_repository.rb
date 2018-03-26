@@ -2,10 +2,11 @@ require_relative 'item'
 require 'csv'
 
 class ItemRepository
-  attr_reader :data
+  attr_reader :data, :parent
 
-  def initialize(file_path)
+  def initialize(file_path, parent)
     @data = parse_csv(file_path)
+    @parent = parent
   end
 
   def inspect
@@ -15,9 +16,13 @@ class ItemRepository
   def parse_csv(file)
     data_hash = {}
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
-      data_hash[row[:id].to_i] = Item.new(Hash[row])
+      data_hash[row[:id].to_i] = Item.new(Hash[row], self)
     end
     @data = data_hash
+  end
+
+  def merchant
+    @parent.merchants
   end
 
   def all

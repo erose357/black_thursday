@@ -2,10 +2,11 @@ require_relative 'merchant'
 require 'csv'
 
 class MerchantRepository
-  attr_reader :data
+  attr_reader :data, :parent
 
-  def initialize(file_path)
+  def initialize(file_path, parent)
     @data = parse_csv(file_path)
+    @parent = parent
   end
 
   def inspect
@@ -15,7 +16,7 @@ class MerchantRepository
   def parse_csv(file)
     data_hash = {}
     CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
-      data_hash[row[:id].to_i] = Merchant.new(Hash[row])
+      data_hash[row[:id].to_i] = Merchant.new(Hash[row], self)
     end
     @data = data_hash
   end
@@ -38,5 +39,9 @@ class MerchantRepository
       v.name.downcase.include?(merchant_name.downcase)
     end
     merchants == {} ? [] : merchants.values
+  end
+
+  def items
+    @parent.items.data.values
   end
 end

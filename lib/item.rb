@@ -3,9 +3,10 @@ require 'time'
 
 class Item
   attr_reader :id, :name, :description, :unit_price,
-              :created_at, :updated_at, :merchant_id
+              :created_at, :updated_at, :merchant_id,
+              :parent
 
-  def initialize(attrs)
+  def initialize(attrs, parent)
     @id = attrs[:id].to_i
     @name = attrs[:name]
     @description = attrs[:description]
@@ -13,6 +14,7 @@ class Item
     @created_at = format_time(attrs[:created_at])
     @updated_at = format_time(attrs[:updated_at])
     @merchant_id = attrs[:merchant_id].to_i
+    @parent = parent
   end
 
   def format_time(time_string)
@@ -28,5 +30,9 @@ class Item
 
   def unit_price_to_dollars(unit_price)
     unit_price.to_f
+  end
+
+  def merchant
+    @parent.merchant.find_by_id(self.merchant_id)
   end
 end

@@ -23,4 +23,25 @@ RSpec.describe SalesEngine do
       end
     end
   end
+
+  describe 'Relationships' do
+    describe 'merchant#items' do
+      it 'returns an Array of all items matching the merchant_id provided' do
+        merchant = se.merchants.find_by_id(12334105)
+
+        expect(merchant.items).to be_an_instance_of(Array)
+        expect(merchant.items[0]).to be_an_instance_of(Item)
+        expect(merchant.items.map(&:id)).to eq([263396209, 263500440, 263501394])
+      end
+    end
+
+    describe 'item#merchant' do
+      it "returns the merchant instance matching the item's merchant_id" do
+        item = se.items.find_by_id(263396209)
+
+        expect(item.merchant).to be_an_instance_of(Merchant)
+        expect(item.merchant.id).to eq(12334105)
+      end
+    end
+  end
 end
