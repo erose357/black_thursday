@@ -27,6 +27,13 @@ class SalesAnalyst
     end.compact
   end
 
+  def average_item_price_for_merchant(merchant_id)
+    merchant = @engine.merchants.data[merchant_id]
+    (merchant.items.reduce(BigDecimal.new(0)) do |sum, i|
+      sum + (i.unit_price)
+    end / merchant.items.length).round(2)
+  end
+
   private
     def merchant_item_count
       @engine.merchants.item_count_by_merchant

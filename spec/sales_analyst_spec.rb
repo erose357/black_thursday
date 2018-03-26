@@ -43,9 +43,16 @@ RSpec.describe SalesAnalyst do
     end
 
     describe '#merchants_with_high_item_count' do
-      it 'merchants more than one standard deviation above the average number of products' do
+      it 'returns merchants more than one standard deviation above the average number of products' do
         expect(sa_2.merchants_with_high_item_count.length).to eq(52)
         expect(sa_2.merchants_with_high_item_count[0]).to be_an_instance_of(Merchant)
+      end
+    end
+
+    describe '#average_item_price_for_merchant' do
+      it 'returns average item price for merchant_id supplied' do
+        expect(sa.average_item_price_for_merchant(12334105).to_f.round(2)).to eq(16.66)
+        expect(sa.average_item_price_for_merchant(12334105)).to be_an_instance_of(BigDecimal)
       end
     end
   end
