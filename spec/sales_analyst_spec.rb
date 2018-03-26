@@ -38,6 +38,14 @@ RSpec.describe SalesAnalyst do
     describe '#average_items_per_merchant_standard_deviation' do
       it 'returns the standard deviation of average items per merchant' do
         expect(sa_2.average_items_per_merchant_standard_deviation).to eq(3.26)
+        expect(sa_2.average_items_per_merchant_standard_deviation).to be_an_instance_of(Float)
+      end
+    end
+
+    describe '#merchants_with_high_item_count' do
+      it 'merchants more than one standard deviation above the average number of products' do
+        expect(sa_2.merchants_with_high_item_count.length).to eq(52)
+        expect(sa_2.merchants_with_high_item_count[0]).to be_an_instance_of(Merchant)
       end
     end
   end
