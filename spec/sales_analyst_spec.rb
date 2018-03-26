@@ -1,13 +1,15 @@
 require_relative '../lib/sales_analyst'
 RSpec.describe SalesAnalyst do
   let (:file_paths) { 
-    { :merchants => 'spec/fixtures/merchants_fixture.csv', 
-      :items => 'spec/fixtures/items_fixture.csv' 
+    { :merchants => 'spec/fixtures/merchants_fixture.csv',
+      :items => 'spec/fixtures/items_fixture.csv',
+      :invoices => 'spec/fixtures/invoices_fixture.csv'
     }
   }
   let (:file_paths_2) {
-    { :merchants => 'data/merchants.csv', 
-      :items => 'data/items.csv' 
+    { :merchants => 'data/merchants.csv',
+      :items => 'data/items.csv',
+      :invoices => 'spec/fixtures/invoices_fixture.csv'
     }
   }
 
