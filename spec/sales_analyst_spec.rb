@@ -62,5 +62,13 @@ RSpec.describe SalesAnalyst do
         expect(sa_2.average_average_price_per_merchant).to be_an_instance_of(BigDecimal)
       end
     end
+
+    describe '#golden_items' do
+      it 'returns items that are two standard deviations above the average item price' do
+        expect(sa_2.golden_items[0]).to be_an_instance_of(Item)
+        expect(sa_2.golden_items).to be_an_instance_of(Array)
+        expect(sa_2.golden_items.length).to eq(5)
+      end
+    end
   end
 end
