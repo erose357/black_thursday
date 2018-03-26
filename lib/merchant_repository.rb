@@ -42,6 +42,10 @@ class MerchantRepository
   end
 
   def items
-    @parent.items.data.values
+    @parent.items.data
+  end
+
+  def item_count_by_merchant
+    @data.map { |k,v| [k, v.items.count.to_f] }.to_h
   end
 end

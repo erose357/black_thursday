@@ -8,6 +8,6 @@ class Merchant
   end
 
   def items
-    @parent.items.find_all { |i| i.merchant_id == self.id }
+    @parent.items.values.find_all { |i| i.merchant_id == self.id }
   end
 end
