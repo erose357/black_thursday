@@ -55,5 +55,12 @@ RSpec.describe SalesAnalyst do
         expect(sa.average_item_price_for_merchant(12334105)).to be_an_instance_of(BigDecimal)
       end
     end
+
+    describe '#average_average_price_per_merchant' do
+      it 'returns the average of all average ite prices' do
+        expect(sa_2.average_average_price_per_merchant.to_f).to eq(350.29)
+        expect(sa_2.average_average_price_per_merchant).to be_an_instance_of(BigDecimal)
+      end
+    end
   end
 end

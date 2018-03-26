@@ -23,19 +23,29 @@ class SalesAnalyst
     std_deviation = average_items_per_merchant_standard_deviation
     item_count = merchant_item_count
     item_count.map do |k,v|
-      @engine.merchants.data[k] if v > (mean + std_deviation)
+      merchants.data[k] if v > (mean + std_deviation)
     end.compact
   end
 
   def average_item_price_for_merchant(merchant_id)
-    merchant = @engine.merchants.data[merchant_id]
+    merchant = merchants.data[merchant_id]
     (merchant.items.reduce(BigDecimal.new(0)) do |sum, i|
       sum + (i.unit_price)
     end / merchant.items.length).round(2)
   end
 
+  def average_average_price_per_merchant
+    ((merchants.data.values.map do |m|
+      average_item_price_for_merchant(m.id)
+    end.reduce(&:+))/merchants.data.values.length).round(2)
+  end
+
   private
+    def merchants
+      @engine.merchants
+    end
+
     def merchant_item_count
-      @engine.merchants.item_count_by_merchant
+      merchants.item_count_by_merchant
     end
 end
