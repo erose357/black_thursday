@@ -36,21 +36,21 @@ RSpec.describe Invoice do
 
     describe '@status' do
       it 'returns the status' do
-        expect(i.status).to eq('pending')
-        expect(i.status).to be_an_instance_of(String)
+        expect(i.status).to eq(:pending)
+        expect(i.status).to be_an_instance_of(Symbol)
       end
     end
 
     describe '@created_at' do
       it 'returns the time created_at' do
-        expect(i.created_at.to_s).to eq('2007-06-04 00:00:00 UTC')
+        expect(i.created_at.to_s).to eq('2007-06-04 00:00:00 -0600')
         expect(i.created_at).to be_an_instance_of(Time)
       end
     end
 
     describe '@updated_at' do
       it 'returns the time updated_at' do
-        expect(i.updated_at.to_s).to eq('2007-06-04 00:00:00 UTC')
+        expect(i.updated_at.to_s).to eq('2016-01-11 00:00:00 -0700')
         expect(i.updated_at).to be_an_instance_of(Time)
       end
     end

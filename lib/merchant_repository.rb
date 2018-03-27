@@ -21,6 +21,14 @@ class MerchantRepository
     @data = data_hash
   end
 
+  def items
+    @parent.items.data
+  end
+
+  def invoices
+    @parent.invoices.data
+  end
+
   def all
     @data.values
   end
@@ -41,11 +49,11 @@ class MerchantRepository
     merchants == {} ? [] : merchants.values
   end
 
-  def items
-    @parent.items.data
-  end
-
   def item_count_by_merchant
     @data.map { |k,v| [k, v.items.count.to_f] }.to_h
+  end
+
+  def invoice_count_by_merchant
+    @data.map { |_k,v| [v, v.invoices.count.to_f] }.to_h
   end
 end

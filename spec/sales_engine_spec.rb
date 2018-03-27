@@ -51,5 +51,25 @@ RSpec.describe SalesEngine do
         expect(item.merchant.id).to eq(12334105)
       end
     end
+
+    describe 'merchant#invoices' do
+      it 'returns the invoices associated with merchant_id provided' do
+        merchant = se.merchants.find_by_id(12334105)
+
+        expect(merchant.invoices).to be_an_instance_of(Array)
+        expect(merchant.invoices[0]).to be_an_instance_of(Invoice)
+        expect(merchant.invoices[0].id).to eq(74)
+        expect(merchant.invoices.count).to eq(5)
+      end
+    end
+
+    describe 'invoice#merchant' do
+      it 'returns the merchant associated with the inovice_id provided' do
+        invoice = se.invoices.find_by_id(602)
+
+        expect(invoice.merchant).to be_an_instance_of(Merchant)
+        expect(invoice.merchant.id).to eq(12334123)
+      end
+    end
   end
 end

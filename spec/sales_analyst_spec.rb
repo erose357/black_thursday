@@ -1,4 +1,6 @@
 require_relative '../lib/sales_analyst'
+require_relative '../lib/sales_engine'
+
 RSpec.describe SalesAnalyst do
   let (:file_paths) { 
     { :merchants => 'spec/fixtures/merchants_fixture.csv',
@@ -9,7 +11,7 @@ RSpec.describe SalesAnalyst do
   let (:file_paths_2) {
     { :merchants => 'data/merchants.csv',
       :items => 'data/items.csv',
-      :invoices => 'spec/fixtures/invoices_fixture.csv'
+      :invoices => 'data/invoices.csv'
     }
   }
 
@@ -70,6 +72,59 @@ RSpec.describe SalesAnalyst do
         expect(sa_2.golden_items[0]).to be_an_instance_of(Item)
         expect(sa_2.golden_items).to be_an_instance_of(Array)
         expect(sa_2.golden_items.length).to eq(5)
+      end
+    end
+
+    describe '#average_invoices_per_merchant' do
+      it 'returns the average invoices per merchant' do
+        expect(sa.average_invoices_per_merchant).to eq(3.23)
+        expect(sa.average_invoices_per_merchant).to be_an_instance_of(Float)
+      end
+    end
+
+    describe '#average_invoices_per_merchant_standard_deviation' do
+      it 'returns the standard deviation of invoices per merchant' do
+        expect(sa.average_invoices_per_merchant_standard_deviation).to eq(3.35)
+        expect(sa.average_invoices_per_merchant_standard_deviation).to be_an_instance_of(Float)
+      end
+    end
+
+    describe '#top_merchants_by_invoice_count' do
+      it 'returns the merchants who are two standard deviations above the mean in invoice count' do
+        top = sa.top_merchants_by_invoice_count
+
+        expect(top).to be_an_instance_of(Array)
+        expect(top[0]).to be_an_instance_of(Merchant)
+        expect(top[0].id).to eq(12334113)
+        expect(top.length).to eq(1)
+      end
+    end
+
+    describe '#bottom_merchants_by_invoice_count' do
+      it 'returns merchants who are two standard deviations below the mean' do
+        bottom = sa_2.bottom_merchants_by_invoice_count
+
+        expect(bottom).to be_an_instance_of(Array)
+        expect(bottom[0]).to be_an_instance_of(Merchant)
+        expect(bottom.length).to eq(4)
+      end
+    end
+
+    describe '#top_days_by_invoice_count' do
+      it 'returns Array of days of the week that invoices are created more than one standard deviation above the mean' do
+        days = sa.top_days_by_invoice_count
+
+        expect(days).to be_an_instance_of(Array)
+        expect(days[0]).to eq('Monday')
+      end
+    end
+
+    describe '#invoice_status' do
+      it 'returns the percentage of invoices with the supplied status' do
+        expect(sa.invoice_status(:pending)).to be_an_instance_of(Float)
+        expect(sa.invoice_status(:pending)).to eq(16.67)
+        expect(sa.invoice_status(:returned)).to eq(14.29)
+        expect(sa.invoice_status(:shipped)).to eq(69.05)
       end
     end
   end
