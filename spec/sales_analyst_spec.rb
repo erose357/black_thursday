@@ -5,13 +5,15 @@ RSpec.describe SalesAnalyst do
   let (:file_paths) { 
     { :merchants => 'spec/fixtures/merchants_fixture.csv',
       :items => 'spec/fixtures/items_fixture.csv',
-      :invoices => 'spec/fixtures/invoices_fixture.csv'
+      :invoices => 'spec/fixtures/invoices_fixture.csv',
+      :invoice_items => 'spec/fixtures/invoice_items_fixture.csv'
     }
   }
   let (:file_paths_2) {
     { :merchants => 'data/merchants.csv',
       :items => 'data/items.csv',
-      :invoices => 'data/invoices.csv'
+      :invoices => 'data/invoices.csv',
+      :invoice_items => 'data/invoice_items.csv'
     }
   }
 

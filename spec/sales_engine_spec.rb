@@ -3,7 +3,8 @@ require_relative '../lib/sales_engine'
 RSpec.describe SalesEngine do
   let (:file_paths) { { :merchants => 'spec/fixtures/merchants_fixture.csv',
                         :items => 'spec/fixtures/items_fixture.csv',
-                        :invoices => 'spec/fixtures/invoices_fixture.csv'
+                        :invoices => 'spec/fixtures/invoices_fixture.csv',
+                        :invoice_items => 'spec/fixtures/invoice_items_fixture.csv'
   } }
 
   let (:se) { SalesEngine.from_csv(file_paths) }
@@ -28,6 +29,12 @@ RSpec.describe SalesEngine do
     describe 'invoices' do
       it 'can access invoices attribute' do
         expect(se.invoices).to be_an_instance_of(InvoiceRepository)
+      end
+    end
+
+    describe 'invoice_items' do
+      it 'can access invoice_items attribute' do
+        expect(se.invoice_items).to be_an_instance(InvoiceItemRepository)
       end
     end
   end
