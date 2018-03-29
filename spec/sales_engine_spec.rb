@@ -34,7 +34,7 @@ RSpec.describe SalesEngine do
 
     describe 'invoice_items' do
       it 'can access invoice_items attribute' do
-        expect(se.invoice_items).to be_an_instance(InvoiceItemRepository)
+        expect(se.invoice_items).to be_an_instance_of(InvoiceItemRepository)
       end
     end
   end

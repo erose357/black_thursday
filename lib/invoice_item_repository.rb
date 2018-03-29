@@ -20,4 +20,20 @@ class InvoiceItemRepository
     end
     @data = data_hash
   end
+
+  def all
+    @data.values
+  end
+
+  def find_by_id(invoice_item_id)
+    @data[invoice_item_id]
+  end
+
+  def find_all_by_item_id(item_id)
+    @data.values.find_all { |ii| ii if ii.item_id == item_id }
+  end
+
+  def find_all_by_invoice_id(invoice_id)
+    @data.values.find_all { |ii| ii if ii.invoice_id == invoice_id }
+  end
 end
