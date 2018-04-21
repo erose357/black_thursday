@@ -26,4 +26,8 @@ class InvoiceItem
     to_dollars = price_string.insert(-3, ".")
     BigDecimal.new(to_dollars)
   end
+
+  def unit_price_to_dollars
+    unit_price.to_f
+  end
 end

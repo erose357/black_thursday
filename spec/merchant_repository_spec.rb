@@ -62,7 +62,8 @@ RSpec.describe MerchantRepository do
     end
 
     describe '#item_count_by_merchant' do
-      skip it 'returns a hash with merchant_id as the key and item count as the value' do
+     #need to decide on a way to handle the relationshihp to 'parent' needed for this test
+     skip it 'returns a hash with merchant_id as the key and item count as the value' do
         expect(mr.item_count_by_merchant).to be_an_instance_of(Hash)
         expect(mr.item_count_by_merchant.keys.first).to eq(12334105)
         expect(mr.item_count_by_merchant.values.first).to eq(3)

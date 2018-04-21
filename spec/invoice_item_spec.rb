@@ -62,5 +62,12 @@ RSpec.describe InvoiceItem do
         expect(ii.updated_at).to be_an_instance_of(Time)
       end
     end
+
+    describe '#unit_price_to_dollars' do
+      it 'returns the price of the invoice item in $ as Float' do
+        expect(ii.unit_price_to_dollars).to be_an_instance_of(Float)
+        expect(ii.unit_price_to_dollars).to eq(10.99)
+      end
+    end
   end
 end
