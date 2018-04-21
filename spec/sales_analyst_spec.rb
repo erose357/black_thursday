@@ -7,7 +7,8 @@ RSpec.describe SalesAnalyst do
       :items => 'spec/fixtures/items_fixture.csv',
       :invoices => 'spec/fixtures/invoices_fixture.csv',
       :invoice_items => 'spec/fixtures/invoice_items_fixture.csv',
-      :transactions => 'spec/fixtures/transactions_fixture.csv'
+      :transactions => 'spec/fixtures/transactions_fixture.csv',
+      :customers => 'spec/fixtures/customers_fixture.csv'
     }
   }
   let (:file_paths_2) {
@@ -15,7 +16,8 @@ RSpec.describe SalesAnalyst do
       :items => 'data/items.csv',
       :invoices => 'data/invoices.csv',
       :invoice_items => 'data/invoice_items.csv',
-      :transactions => 'spec/fixtures/transactions_fixture.csv'
+      :transactions => 'spec/fixtures/transactions_fixture.csv',
+      :customers => 'spec/fixtures/customers_fixture.csv'
     }
   }
 

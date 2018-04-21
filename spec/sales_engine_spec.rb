@@ -5,7 +5,8 @@ RSpec.describe SalesEngine do
                         :items => 'spec/fixtures/items_fixture.csv',
                         :invoices => 'spec/fixtures/invoices_fixture.csv',
                         :invoice_items => 'spec/fixtures/invoice_items_fixture.csv',
-                        :transactions => 'spec/fixtures/transactions_fixture.csv'
+                        :transactions => 'spec/fixtures/transactions_fixture.csv',
+                        :customers => 'spec/fixtures/customers_fixture.csv'
   } }
 
   let (:se) { SalesEngine.from_csv(file_paths) }
@@ -42,6 +43,12 @@ RSpec.describe SalesEngine do
     describe 'transactions' do
       it 'can access transactions attribute' do
         expect(se.transactions).to be_an_instance_of(TransactionRepository)
+      end
+    end
+
+    describe 'customers' do
+      it 'can access customers attribute' do
+        expect(se.customers).to be_an_instance_of(CustomerRepository)
       end
     end
   end
