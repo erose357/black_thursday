@@ -103,6 +103,10 @@ class SalesAnalyst
       @engine.invoices
     end
 
+    def transactions
+      @engine.transactions
+    end
+
     def merchant_item_count
       merchants.item_count_by_merchant
     end

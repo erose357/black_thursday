@@ -16,7 +16,7 @@ RSpec.describe SalesAnalyst do
       :items => 'data/items.csv',
       :invoices => 'data/invoices.csv',
       :invoice_items => 'data/invoice_items.csv',
-      :transactions => 'spec/fixtures/transactions_fixture.csv',
+      :transactions => 'data/transactions.csv',
       :customers => 'spec/fixtures/customers_fixture.csv'
     }
   }
@@ -67,7 +67,7 @@ RSpec.describe SalesAnalyst do
     end
 
     describe '#average_average_price_per_merchant' do
-      it 'returns the average of all average ite prices' do
+      it 'returns the average of all average item prices' do
         expect(sa_2.average_average_price_per_merchant.to_f).to eq(350.29)
         expect(sa_2.average_average_price_per_merchant).to be_an_instance_of(BigDecimal)
       end

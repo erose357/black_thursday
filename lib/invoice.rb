@@ -22,5 +22,24 @@ class Invoice
   def merchant
     @parent.merchant[self.merchant_id]
   end
+
+  def is_paid_in_full?
+    results = transactions.find_all_by_invoice_id(self.id).map(&:result)
+    results.include?('success') ? true : false
+  end
+
+  def total
+    items = invoice_items.find_all_by_invoice_id(self.id)
+    items.map { |i| i.quantity * i.unit_price }.reduce(:+)
+  end
+
+  private
+    def transactions
+      @parent.parent.transactions
+    end
+
+    def invoice_items
+      @parent.parent.invoice_items
+    end
 end
 

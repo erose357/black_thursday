@@ -28,4 +28,14 @@ class CustomerRepository
   def find_by_id(customer_id)
     @data[customer_id]
   end
+
+  def find_all_by_first_name(customer_first_name)
+    name = customer_first_name.downcase
+    all.find_all { |cust| cust.first_name.downcase.include?(name) }
+  end
+
+  def find_all_by_last_name(customer_last_name)
+    name = customer_last_name.downcase
+    all.find_all { |cust| cust.last_name.downcase.include?(name) }
+  end
 end

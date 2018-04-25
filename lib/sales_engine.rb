@@ -6,7 +6,8 @@ require_relative 'transaction_repository'
 require_relative 'customer_repository'
 
 class SalesEngine
-  attr_reader :merchants, :items, :invoices, :invoice_items, :transactions, :customers
+  attr_reader :merchants, :items, :invoices, :invoice_items,
+              :transactions, :customers
 
   def initialize(file_paths)
     @merchants = MerchantRepository.new(file_paths[:merchants], self)

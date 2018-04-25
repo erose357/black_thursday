@@ -31,5 +31,48 @@ RSpec.describe CustomerRepository do
         expect(customer).to be_nil
       end
     end
+
+    describe '#find_all_by_first_name' do
+      it 'returns one or more matches of first name to the substring provided' do
+        customer_1 = cr.find_all_by_first_name('Flossie')
+        customer_2 = cr.find_all_by_first_name('Mi')
+
+        expect(customer_1).to be_an_instance_of(Array)
+        expect(customer_1[0]).to be_an_instance_of(Customer)
+        expect(customer_1[0].id).to eq(33)
+
+        expect(customer_2).to be_an_instance_of(Array)
+        expect(customer_2[0]).to be_an_instance_of(Customer)
+        expect(customer_2.map(&:id)).to include(785,182)
+      end
+
+      it 'returns [] if no match found' do
+        customer = cr.find_all_by_first_name('XX')
+
+        expect(customer).to eq([])
+      end
+    end
+
+    describe '#find_all_by_last_name' do
+      it 'returns one or more matches of last name to the substring provided' do
+        customer_1 = cr.find_all_by_last_name('er')
+        customer_2 = cr.find_all_by_last_name('Haag')
+
+        expect(customer_1).to be_an_instance_of(Array)
+        expect(customer_1[0]).to be_an_instance_of(Customer)
+        expect(customer_1.map(&:id)).to include(14, 28, 339, 106, 471, 127, 206)
+
+        expect(customer_2).to be_an_instance_of(Array)
+        expect(customer_2[0]).to be_an_instance_of(Customer)
+        expect(customer_2.count).to eq(1)
+        expect(customer_2[0].id).to eq(157)
+      end
+
+      it 'returns [] if no matches found' do
+        customer = cr.find_all_by_first_name('XX')
+
+        expect(customer).to eq([])
+      end
+    end
   end
 end

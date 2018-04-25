@@ -15,7 +15,7 @@ RSpec.describe SalesEngine do
     expect(se).to be_an_instance_of(SalesEngine)
   end
 
-  describe 'Attributes' do
+  context 'Attributes' do
     describe 'merchants' do
       it 'can access merchants attribute' do
         expect(se.merchants).to be_an_instance_of(MerchantRepository)
@@ -53,7 +53,7 @@ RSpec.describe SalesEngine do
     end
   end
 
-  describe 'Relationships' do
+  context 'Relationships' do
     describe 'merchant#items' do
       it 'returns an Array of all items matching the merchant_id provided' do
         merchant = se.merchants.find_by_id(12334105)
@@ -90,6 +90,26 @@ RSpec.describe SalesEngine do
 
         expect(invoice.merchant).to be_an_instance_of(Merchant)
         expect(invoice.merchant.id).to eq(12334123)
+      end
+    end
+  end
+
+  context 'Business Intelligence' do
+    describe 'invoice#is_paid_in_full?' do
+      it 'returns all items related to the invoice' do
+        invoice_1 = se.invoices.find_by_id(1372)
+        invoice_2 = se.invoices.find_by_id(1963)
+
+        expect(invoice_1.is_paid_in_full?).to eq(false)
+        expect(invoice_2.is_paid_in_full?).to eq(true)
+      end
+    end
+
+    describe 'invoice#total' do
+      it 'returns the total dollar amount for invoice if paid in full' do
+        invoice_1 = se.invoices.find_by_id(74)
+
+        expect(invoice_1.total.to_f).to eq(14496.62)
       end
     end
   end

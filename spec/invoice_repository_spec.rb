@@ -7,7 +7,7 @@ RSpec.describe InvoiceRepository do
     expect(in_r).to be_an_instance_of(InvoiceRepository)
   end
 
-  describe 'Instance methods' do
+  context 'Instance methods' do
     describe '#all' do
       it 'returns Array of all Invoice instances' do
         expect(in_r.all).to be_an_instance_of(Array)
