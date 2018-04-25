@@ -9,7 +9,7 @@ RSpec.describe ItemRepository do
 
   describe 'Attributes' do
     it 'data' do
-      expect(ir.data.length).to eq(10)
+      expect(ir.data.length).to eq(16)
       expect(ir.data).to be_an_instance_of(Hash)
     end
   end
@@ -18,7 +18,7 @@ RSpec.describe ItemRepository do
     describe '#all' do
       it 'returns an Array of all Item instances'do
         expect(ir.all).to be_an_instance_of(Array)
-        expect(ir.all.count).to eq(10)
+        expect(ir.all.count).to eq(16)
         expect(ir.all[1]).to be_an_instance_of(Item) 
       end
     end
@@ -97,7 +97,7 @@ RSpec.describe ItemRepository do
 
         expect(find).to be_an_instance_of(Array)
         expect(find[0]).to be_an_instance_of(Item)
-        expect(find.count).to eq(8)
+        expect(find.count).to eq(12)
       end
 
       it 'returns [] if no matches found' do

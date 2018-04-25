@@ -92,6 +92,16 @@ RSpec.describe SalesEngine do
         expect(invoice.merchant.id).to eq(12334123)
       end
     end
+
+    describe 'invoice#items' do
+      it 'returns all items related to the invoice' do
+        invoice = se.invoices.find_by_id(74)
+
+        expect(invoice.items.count).to eq(6)
+        expect(invoice.items).to be_an_instance_of(Array)
+        expect(invoice.items[0]).to be_an_instance_of(Item)
+      end
+    end
   end
 
   context 'Business Intelligence' do

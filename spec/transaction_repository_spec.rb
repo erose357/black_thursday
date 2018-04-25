@@ -11,7 +11,7 @@ RSpec.describe TransactionRepository do
     describe '#all' do
       it 'returns Array of all Transaction instances' do
         expect(tr.all).to be_an_instance_of(Array)
-        expect(tr.all.count).to eq(23)
+        expect(tr.all.count).to eq(27)
         expect(tr.all[0]).to be_an_instance_of(Transaction)
       end
     end
@@ -67,7 +67,7 @@ RSpec.describe TransactionRepository do
       it "returns one or more matches to 'success' result provided" do
         transaction = tr.find_all_by_result('success')
 
-        expect(transaction.count).to eq(17)
+        expect(transaction.count).to eq(21)
         expect(transaction).to be_an_instance_of(Array)
         expect(transaction[0]).to be_an_instance_of(Transaction)
         expect(transaction.map(&:id)).to include(2437, 381, 2287)

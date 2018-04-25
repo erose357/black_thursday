@@ -33,6 +33,11 @@ class Invoice
     items.map { |i| i.quantity * i.unit_price }.reduce(:+)
   end
 
+  def items
+    item_ids = invoice_items.find_all_by_invoice_id(self.id).map(&:item_id)
+    item_ids.map{ |i_id| @parent.parent.items.find_by_id(i_id) }
+  end
+
   private
     def transactions
       @parent.parent.transactions
