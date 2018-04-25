@@ -17,7 +17,7 @@ RSpec.describe SalesAnalyst do
       :invoices => 'data/invoices.csv',
       :invoice_items => 'data/invoice_items.csv',
       :transactions => 'data/transactions.csv',
-      :customers => 'spec/fixtures/customers_fixture.csv'
+      :customers => 'data/customers.csv'
     }
   }
 

@@ -24,7 +24,7 @@ class Invoice
   end
 
   def is_paid_in_full?
-    results = transactions.find_all_by_invoice_id(self.id).map(&:result)
+    results = transactions_data.find_all_by_invoice_id(self.id).map(&:result)
     results.include?('success') ? true : false
   end
 
@@ -35,16 +35,32 @@ class Invoice
 
   def items
     item_ids = invoice_items.find_all_by_invoice_id(self.id).map(&:item_id)
-    item_ids.map{ |i_id| @parent.parent.items.find_by_id(i_id) }
+    item_ids.map{ |i_id| items_data.find_by_id(i_id) }
+  end
+
+  def transactions
+    transactions_data.find_all_by_invoice_id(self.id)
+  end
+
+  def customer
+    customers_data.find_by_id(self.customer_id)
   end
 
   private
-    def transactions
+    def invoice_items
+      @parent.parent.invoice_items
+    end
+
+    def transactions_data
       @parent.parent.transactions
     end
 
-    def invoice_items
-      @parent.parent.invoice_items
+    def items_data
+      @parent.parent.items
+    end
+
+    def customers_data
+      @parent.parent.customers
     end
 end
 

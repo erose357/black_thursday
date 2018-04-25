@@ -102,6 +102,44 @@ RSpec.describe SalesEngine do
         expect(invoice.items[0]).to be_an_instance_of(Item)
       end
     end
+
+    describe 'invoice#transactions' do
+      it 'returns all transactions related to the invoice' do
+        invoice = se.invoices.find_by_id(74)
+
+        expect(invoice.transactions.count).to eq(4)
+        expect(invoice.transactions).to be_an_instance_of(Array)
+        expect(invoice.transactions[0]).to be_an_instance_of(Transaction)
+      end
+    end
+
+    describe 'invoice#customer' do
+      it 'returns the customer related to the invoice' do
+        invoice = se.invoices.find_by_id(391)
+
+        expect(invoice.customer).to be_an_instance_of(Customer)
+        expect(invoice.customer.id).to eq(78)
+      end
+    end
+
+    describe 'transaction#invoice' do
+      it 'returns the related invoice' do
+        transaction = se.transactions.find_by_id(3285)
+
+        expect(transaction.invoice).to be_an_instance_of(Invoice)
+        expect(transaction.invoice.id).to eq(74)
+      end
+    end
+
+    describe 'merchant#customers' do
+      it 'returns related customers' do
+        merchant = se.merchants.find_by_id(12334112)
+
+        expect(merchant.customers.count).to eq(7)
+        expect(merchant.customers).to be_an_instance_of(Array)
+        expect(merchant.customers[0]).to be_an_instance_of(Customer)
+      end
+    end
   end
 
   context 'Business Intelligence' do
