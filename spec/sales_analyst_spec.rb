@@ -30,7 +30,7 @@ RSpec.describe SalesAnalyst do
     expect(sa).to be_an_instance_of(SalesAnalyst)
   end
 
-  describe 'Attributes' do
+  context 'Attributes' do
     describe '@engine' do
       it 'is a valid instance of SalesEngine' do
         expect(sa.engine).to be_an_instance_of(SalesEngine)
@@ -38,7 +38,7 @@ RSpec.describe SalesAnalyst do
     end
   end
 
-  describe 'Instance methods' do
+  context 'Instance methods' do
     describe '#average_items_per_mechant' do
       it 'returns an average of items per merchant' do
         expect(sa.average_items_per_merchant).to eq(0.31)
@@ -131,6 +131,14 @@ RSpec.describe SalesAnalyst do
         expect(sa.invoice_status(:pending)).to eq(16.67)
         expect(sa.invoice_status(:returned)).to eq(14.29)
         expect(sa.invoice_status(:shipped)).to eq(69.05)
+      end
+    end
+  end
+
+  context 'Merchant Analytics' do
+    describe '#total_revenue_by_date' do
+      it 'returns total revenue for given date' do
+        expect(sa_2.total_revenue_by_date(Time.parse('2009-02-07')).to_f).to eq(21067.77)
       end
     end
   end
