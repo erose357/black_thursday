@@ -45,6 +45,14 @@ class InvoiceRepository
     @data.values.find_all { |inv| inv.status == status }
   end
 
+  def find_all_by_date(date, attr = 'created_at')
+    if attr == 'updated_at'
+      @data.values.find_all { |inv| inv.updated_at == date }
+    else
+      @data.values.find_all { |inv| inv.created_at == date }
+    end
+  end
+
   def invoice_count_by_day
     days_hash = {}
     @data.values.each do |inv|

@@ -91,9 +91,8 @@ class SalesAnalyst
   end
 
   def total_revenue_by_date(date)
-    inv_list = invoices.data.values.find_all { |inv| inv.created_at == date }
-    list = inv_list.map { |i| @engine.invoice_items.find_all_by_invoice_id(i.id) }.flatten
-    list.map { |i| i.unit_price * i.quantity }.reduce(:+)
+    inv_list = invoices.find_all_by_date(date)
+    inv_list.map(&:total).reduce(:+)
   end
 
   private
@@ -111,6 +110,10 @@ class SalesAnalyst
 
     def transactions
       @engine.transactions
+    end
+
+    def invoice_items
+      @engine.invoice_items
     end
 
     def merchant_item_count

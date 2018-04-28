@@ -74,5 +74,27 @@ RSpec.describe InvoiceRepository do
         expect(shipped.count).to eq(29)
       end
     end
+
+    describe '#find_all_by_date' do
+      it 'returns Array of one or more matches for date supplied' do
+        date = Time.parse('2005-01-03')
+        result = in_r.find_all_by_date(date)
+
+        expect(result.count).to eq(1)
+        expect(result).to be_an_instance_of(Array)
+        expect(result[0]).to be_an_instance_of(Invoice)
+        expect(result[0].id).to eq(74)
+      end
+
+      it 'can search by updated_at or created_at attributes' do
+        date = Time.parse('2014-10-01')
+        result = in_r.find_all_by_date(date, 'updated_at')
+
+        expect(result.count).to eq(1)
+        expect(result).to be_an_instance_of(Array)
+        expect(result[0]).to be_an_instance_of(Invoice)
+        expect(result[0].id).to eq(1195)
+      end
+    end
   end
 end
