@@ -95,6 +95,20 @@ class SalesAnalyst
     inv_list.map(&:total).reduce(:+)
   end
 
+  def top_revenue_earners(count = 20)
+    revenue = merchants.all.map { |m| [m, m.revenue] if m.revenue }.compact.to_h
+    revenue.sort_by { |_k,v| v }.to_h.keys.reverse[0..(count-1)]
+  end
+
+  def merchants_ranked_by_revenue
+    revenue = merchants.all.map { |m| m.revenue ? [m, m.revenue] : [m, BigDecimal.new(0)] }.compact.to_h
+    revenue.sort_by { |_k,v| v }.to_h.keys.reverse
+  end
+
+  def merchants_with_pending_invoices
+    require'pry';binding.pry
+  end
+
   private
     def merchants
       @engine.merchants

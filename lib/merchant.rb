@@ -20,6 +20,10 @@ class Merchant
     customer_ids.map { |c_id| customers_data.find_by_id(c_id) }
   end
 
+  def revenue
+    invoices.select(&:is_paid_in_full?).map(&:total).reduce(:+)
+  end
+
   private
     def customers_data
       @parent.parent.customers

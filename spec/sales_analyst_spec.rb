@@ -141,5 +141,49 @@ RSpec.describe SalesAnalyst do
         expect(sa_2.total_revenue_by_date(Time.parse('2009-02-07')).to_f).to eq(21067.77)
       end
     end
+
+    describe '#top_revenue_earners' do
+      it 'returns by default the top 20 merchants ranked by revenue if no argument is given' do
+        skip "need to update fixtures with all invoices related to merchants"
+        revenue = sa.top_revenue_earners
+
+        expect(revenue).to be_an_instance_of(Array)
+        expect(revenue[0]).to be_an_instance_of(Merchant)
+        expect(revenue.count).to eq(4)
+        expect(revenue[0].id).to eq(12334105)
+      end
+
+      it 'returns the number of merchants specified' do
+        skip "need to update fixtures with all invoices related to merchants"
+        revenue = sa.top_revenue_earners(2)
+
+        expect(revenue).to be_an_instance_of(Array)
+        expect(revenue[0]).to be_an_instance_of(Merchant)
+        expect(revenue.count).to eq(2)
+        expect(revenue[1].id).to eq(12334123)
+      end
+    end
+
+    describe '#merchants_ranked_by_revenue' do
+      it 'returns the merchants ranked by total revenue' do
+        skip "temp skipped to save test suite run time"
+        ranked = sa_2.merchants_ranked_by_revenue
+
+        expect(ranked).to be_an_instance_of(Array)
+        expect(ranked.first.id).to eq(12334634)
+        expect(ranked.last.id).to eq(12336175)
+        expect(ranked.first).to be_an_instance_of(Merchant)
+      end
+    end
+
+    describe '#merchants_with_pending_invoices' do
+       it 'returns merchants with pending invoices' do
+         pending = sa.merchants_with_pending_invoices
+
+         expect(pending).to be_an_instance_of(Array)
+         expect(pending.first).to be_an_instance_of(Merchant)
+         expect(pending.count).to eq(5)
+       end
+    end
   end
 end

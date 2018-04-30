@@ -24,8 +24,13 @@ class Invoice
   end
 
   def is_paid_in_full?
-    results = transactions_data.find_all_by_invoice_id(self.id).map(&:result)
+    results = transactions.map(&:result)
     results.include?('success') ? true : false
+  end
+
+  def is_pending?
+    results = transactions.map(&:result)
+    results.include?('success') ? false : true
   end
 
   def total

@@ -160,5 +160,15 @@ RSpec.describe SalesEngine do
         expect(invoice_1.total.to_f).to eq(14496.62)
       end
     end
+
+    describe 'merchants#revenue' do
+       it 'returns the revenue for a given merchant' do
+         merchant = se.merchants.find_by_id(12334105)
+         result = merchant.revenue
+
+         expect(result).to eq(0.1914372e5)
+         expect(result).to be_an_instance_of(BigDecimal)
+       end
+    end
   end
 end
